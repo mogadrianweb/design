@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* 100% Elimination of unstyled browser scrollbars across all browsers and engines */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar,
+::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
+}
+
+.no-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* iOS Glassmorphism Pure Design Tokens */
+:root {
+  --ios-blur: blur(28px) saturate(190%);
+  --ios-blur-subtle: blur(16px) saturate(160%);
+  --ios-glass-border: 1px solid rgba(255, 255, 255, 0.12);
+  --ios-glass-highlight: inset 0 1px 0.5px rgba(255, 255, 255, 0.22);
+  --ios-glass-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+.glass-ios {
+  background: rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: var(--ios-blur) !important;
+  -webkit-backdrop-filter: var(--ios-blur) !important;
+  border: var(--ios-glass-border) !important;
+  box-shadow: var(--ios-glass-highlight), var(--ios-glass-shadow) !important;
+}
+
+.glass-ios-card {
+  background: rgba(30, 41, 59, 0.55) !important;
+  backdrop-filter: var(--ios-blur-subtle) !important;
+  -webkit-backdrop-filter: var(--ios-blur-subtle) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.glass-ios-button {
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.glass-ios-button:active {
+  transform: scale(0.97) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Native touch scrolling & Ambient Background */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  background-color: #020617;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
+}
+

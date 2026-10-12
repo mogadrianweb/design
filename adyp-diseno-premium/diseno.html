@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ADYP — Sistema de Diseño Glassmorphism iOS Nativo</title>
+  <meta name="description" content="Guía visual de referencia y prototipo autónomo con estética Glass iOS para la aplicación móvil y web de ADYP (A Disfrutar y Punto).">
+  <!-- Google Fonts: Plus Jakarta Sans / SF Pro fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN para vista autónoma sin dependencias externas -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            ios: {
+              bg: '#000000',
+              canvas: '#05070f',
+              glass: 'rgba(18, 24, 38, 0.72)',
+              glassHover: 'rgba(30, 41, 62, 0.85)',
+              glassCard: 'rgba(15, 23, 42, 0.65)',
+              border: 'rgba(255, 255, 255, 0.12)',
+              borderSubtle: 'rgba(255, 255, 255, 0.06)',
+              highlight: 'rgba(255, 255, 255, 0.16)',
+              coral: '#f43f5e',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              blue: '#0a84ff',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Efectos iOS Glassmorphism Puros */
+    :root {
+      --ios-blur: blur(28px) saturate(190%);
+      --ios-blur-subtle: blur(16px) saturate(160%);
+      --ios-glass-border: 1px solid rgba(255, 255, 255, 0.12);
+      --ios-glass-highlight: inset 0 1px 0.5px rgba(255, 255, 255, 0.22);
+      --ios-glass-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+
+    body {
+      background-color: #020617;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: #f8fafc;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .glass-ios {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: var(--ios-blur);
+      -webkit-backdrop-filter: var(--ios-blur);
+      border: var(--ios-glass-border);
+      box-shadow: var(--ios-glass-highlight), var(--ios-glass-shadow);
+    }
+
+    .glass-ios-card {
+      background: rgba(30, 41, 59, 0.55);
+      backdrop-filter: var(--ios-blur-subtle);
+      -webkit-backdrop-filter: var(--ios-blur-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-ios-button {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-ios-button:active {
+      transform: scale(0.97);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Supresión de barras de scroll toscas */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-3 sm:p-6 md:p-8">
+
+  <!-- BARRA DE INFORMACIÓN SUPERIOR -->
+  <header class="w-full max-w-5xl mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-3xl glass-ios">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center font-black text-white text-base shadow-lg shadow-rose-950/40">
+        A
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="font-extrabold text-base text-white tracking-tight">ADYP · Sistema de Diseño Glass iOS</h1>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">Referencia Oficial</span>
+        </div>
+        <p class="text-xs text-slate-400">Guía de arquitectura y maqueta interactiva descargable para tu IA</p>
+      </div>
+    </div>
+
+    <!-- Acciones Rápidas -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <button onclick="copiarPromptMaestro()" class="glass-ios-button px-3.5 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 hover:bg-white/10">
+        <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        <span id="txtCopiar">Copiar Prompt Maestro</span>
+      </button>
+
+      <button onclick="descargarEsteArchivo()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white shadow-lg shadow-rose-950/40 flex items-center gap-1.5 active:scale-95 transition-all">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Descargar diseño.html</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL COMPARATIVO (MÓVIL iOS, TABLET DINÁMICO & ESPECIFICACIONES) -->
+  <main class="w-full max-w-5xl space-y-8">
+
+    <!-- SECCIÓN 1: VISTA PREVIA INTERACTIVA DE DISPOSITIVO MÓVIL GLASS iOS -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- MAQUETA DEL IPHONE 15 PRO (CHASIS & PANTALLA) -->
+      <div class="lg:col-span-6 flex justify-center">
+        <div class="w-full max-w-[375px] h-[750px] bg-black rounded-[50px] border-[10px] border-slate-800 shadow-2xl overflow-hidden relative flex flex-col ring-1 ring-white/20 select-none">
+          
+          <!-- DYNAMIC ISLAND DE APPLE -->
+          <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-40 flex items-center justify-between px-2.5 border border-white/10 shadow-sm pointer-events-none">
+            <div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700"></div>
+            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+          </div>
+
+          <!-- CABECERA NATIVA FIJA SUPERIOR (AppHeader Glass iOS) -->
+          <header class="sticky top-0 z-30 pt-9 pb-2 px-3.5 glass-ios border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center font-black text-white text-xs shadow-md">
+                A
+              </div>
+              <span class="font-extrabold text-sm tracking-tight text-white">ADYP</span>
+              <span class="text-[9px] font-semibold text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded-md border border-rose-500/20">iOS Glass</span>
+            </div>
+
+            <!-- Acciones Header (Campanita & Avatar) -->
+            <div class="flex items-center gap-1.5">
+              <button onclick="toggleModal('modalNotif')" class="relative p-1.5 rounded-xl glass-ios-button text-slate-300 hover:text-white" title="Notificaciones">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                <span class="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full animate-ping"></span>
+                <span class="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
+              </button>
+
+              <button onclick="toggleModal('modalUser')" class="flex items-center gap-1 pl-1 pr-1.5 py-1 rounded-xl glass-ios-button text-xs font-semibold text-white">
+                <div class="w-5 h-5 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 flex items-center justify-center text-[10px] font-black text-white">
+                  M
+                </div>
+                <span class="text-[10px] hidden sm:inline">Madrian</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- CONTENIDO SCROLLEABLE CENTRAL (Sin barra blanca ni barras toscas) -->
+          <div class="flex-1 overflow-y-auto no-scrollbar p-3.5 space-y-3.5 bg-gradient-to-b from-slate-950 to-slate-900/90 text-slate-200">
+            
+            <!-- Barra de Búsqueda Compacta iOS -->
+            <div class="relative">
+              <input type="text" placeholder="Buscar rutas, senderismo, cena..." class="w-full h-8 pl-8 pr-3 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-rose-500/50 backdrop-blur-md">
+              <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            <!-- Chips de Filtro Compactos (Zero-Pill Discipline) -->
+            <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+              <button class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-rose-500 text-white shadow-sm shrink-0">Todas</button>
+              <button class="px-2.5 py-1 rounded-lg text-[10px] font-medium bg-white/5 border border-white/10 text-slate-300 hover:text-white shrink-0">Senderismo</button>
+              <button class="px-2.5 py-1 rounded-lg text-[10px] font-medium bg-white/5 border border-white/10 text-slate-300 hover:text-white shrink-0">Nieve & Raquetas</button>
+              <button class="px-2.5 py-1 rounded-lg text-[10px] font-medium bg-white/5 border border-white/10 text-slate-300 hover:text-white shrink-0">Cultura</button>
+            </div>
+
+            <!-- FICHA DE QUEDADA REAL (Con mini-mapa y sin muro de comentarios) -->
+            <div class="rounded-2xl glass-ios-card p-3 space-y-3 border border-white/10 relative overflow-hidden">
+              <div class="relative h-32 rounded-xl overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Peñalara" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[9px] font-bold bg-black/60 backdrop-blur-md text-amber-300 border border-amber-500/30">
+                  🏔️ Nivel Medio-Alto
+                </span>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-md text-[9px] font-bold bg-emerald-500/80 backdrop-blur-md text-white">
+                  12 / 18 Plazas
+                </span>
+                <div class="absolute bottom-2 left-2 right-2">
+                  <h3 class="text-xs font-black text-white leading-snug">Ruta Invernal Peñalara & Lagunas Glaciares</h3>
+                  <p class="text-[10px] text-slate-300">Sábado 18 Octubre · 09:15 h</p>
+                </div>
+              </div>
+
+              <!-- MÓDULO: PUNTO DE ENCUENTRO CON MINI-MAPA -->
+              <div class="p-2.5 rounded-xl bg-slate-950/80 border border-white/10 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold text-white flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-rose-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                    Punto de encuentro y cómo llegar
+                  </span>
+                  <span class="text-[9px] font-mono text-emerald-400">09:15 h</span>
+                </div>
+                
+                <p class="text-[10px] text-slate-300 leading-snug">
+                  <strong class="text-white">Frente a la taquilla de la estación de tren de Cotos</strong> a las 09:15 h.
+                </p>
+
+                <!-- Mini-mapa Vectorial Interactivo -->
+                <div class="relative h-24 rounded-lg bg-slate-900 border border-white/10 overflow-hidden flex items-center justify-center">
+                  <!-- Cuadrícula Topográfica SVG de fondo -->
+                  <svg class="w-full h-full opacity-30" viewBox="0 0 200 100">
+                    <defs>
+                      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    <!-- Curvas de nivel ficticias de Cotos -->
+                    <path d="M 0 40 Q 60 10 120 40 T 200 30" fill="none" stroke="#f43f5e" stroke-width="1" opacity="0.6"/>
+                    <path d="M 0 65 Q 80 50 140 70 T 200 60" fill="none" stroke="#0ea5e9" stroke-width="1" opacity="0.4"/>
+                  </svg>
+                  
+                  <!-- Waypoint GPS pulsante -->
+                  <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <div class="relative flex items-center justify-center">
+                      <span class="w-4 h-4 rounded-full bg-rose-500 animate-ping opacity-75"></span>
+                      <span class="w-3 h-3 rounded-full bg-rose-600 border border-white shadow-lg absolute"></span>
+                    </div>
+                    <span class="mt-1 px-1.5 py-0.5 rounded text-[8px] font-bold bg-black/80 text-rose-300 border border-rose-500/40">
+                      📍 Taquilla Estación Cotos
+                    </span>
+                  </div>
+
+                  <div class="absolute bottom-1 right-1 text-[8px] font-mono text-slate-400 bg-black/70 px-1 rounded">
+                    40.8252, -3.9625
+                  </div>
+                </div>
+
+                <!-- Botones de Acción GPS -->
+                <div class="grid grid-cols-2 gap-1.5 pt-1">
+                  <a href="https://maps.google.com/?q=40.8252,-3.9625" target="_blank" class="glass-ios-button py-1.5 px-2 rounded-lg text-[9px] font-bold text-center text-rose-300 flex items-center justify-center gap-1 hover:bg-rose-500/20">
+                    🗺️ Abrir en Google Maps
+                  </a>
+                  <button onclick="copiarTexto('40.8252, -3.9625')" class="glass-ios-button py-1.5 px-2 rounded-lg text-[9px] font-semibold text-center text-slate-300 flex items-center justify-center gap-1 hover:bg-white/10">
+                    📋 Copiar GPS
+                  </button>
+                </div>
+              </div>
+
+              <!-- MÓDULO: GRUPO OFICIAL DE WHATSAPP (Sustituye al muro de dudas) -->
+              <div class="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/20 space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                    💬 Grupo de WhatsApp de la Quedada
+                  </span>
+                  <span class="text-[8px] bg-emerald-500/20 text-emerald-300 px-1 rounded">Exclusivo Asistentes</span>
+                </div>
+                <p class="text-[9px] text-slate-300 leading-tight">
+                  Las dudas técnicas, previsión del tiempo y coordinación de coches compartidos se tratan en el grupo oficial.
+                </p>
+                <button onclick="alert('Abriendo enlace de invitación seguro de WhatsApp...')" class="w-full py-1.5 rounded-lg text-[9px] font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-all flex items-center justify-center gap-1 shadow-sm">
+                  🟢 Unirme al WhatsApp de la Quedada
+                </button>
+              </div>
+
+              <!-- Botón de Apuntarse -->
+              <button onclick="alert('¡Te has apuntado con éxito a la quedada!')" class="w-full h-8 rounded-xl font-bold text-xs bg-gradient-to-r from-rose-600 to-amber-600 text-white shadow-md shadow-rose-950/40 active:scale-95 transition-all flex items-center justify-center gap-1">
+                <span>Apuntarme a esta Quedada</span>
+              </button>
+            </div>
+
+            <!-- Otra actividad compacta -->
+            <div class="rounded-xl glass-ios-card p-2.5 flex items-center gap-2.5">
+              <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=200&q=80" alt="Siete Picos" class="w-12 h-12 rounded-lg object-cover shrink-0">
+              <div class="flex-1 min-w-0">
+                <h4 class="text-[11px] font-bold text-white truncate">Paseo Otoñal por el Bosque de la Herrería</h4>
+                <p class="text-[9px] text-slate-400">Domingo 19 Octubre · 10:30 h · Gratis</p>
+              </div>
+              <span class="text-[9px] font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded-md">8 plazas</span>
+            </div>
+
+          </div>
+
+          <!-- BARRA DE NAVEGACIÓN INFERIOR FIJA PERMANENTE (Tab Bar iOS) -->
+          <!-- Cero botón (+) gigante, compacta, 5 accesos equilibrados, sin scroll -->
+          <nav class="sticky bottom-0 z-30 h-14 pb-1 px-2 glass-ios border-t border-white/10 flex items-center justify-around select-none">
+            
+            <!-- 1. Explorar (Activo) -->
+            <button class="flex flex-col items-center justify-center flex-1 py-1 text-rose-400 transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <span class="text-[9px] font-bold tracking-tight mt-0.5">Explorar</span>
+              <span class="w-1 h-1 rounded-full bg-rose-400 mt-0.5"></span>
+            </button>
+
+            <!-- 2. Agenda -->
+            <button class="flex flex-col items-center justify-center flex-1 py-1 text-slate-400 hover:text-white transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span class="text-[9px] font-medium tracking-tight mt-0.5">Agenda</span>
+              <span class="w-1 h-1 rounded-full bg-transparent mt-0.5"></span>
+            </button>
+
+            <!-- 3. Mapa -->
+            <button class="flex flex-col items-center justify-center flex-1 py-1 text-slate-400 hover:text-white transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+              <span class="text-[9px] font-medium tracking-tight mt-0.5">Mapa</span>
+              <span class="w-1 h-1 rounded-full bg-transparent mt-0.5"></span>
+            </button>
+
+            <!-- 4. Mis Planes -->
+            <button class="flex flex-col items-center justify-center flex-1 py-1 text-slate-400 hover:text-white transition-colors relative">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span class="text-[9px] font-medium tracking-tight mt-0.5">Mis Planes</span>
+              <span class="w-1 h-1 rounded-full bg-rose-500 absolute top-1 right-4"></span>
+              <span class="w-1 h-1 rounded-full bg-transparent mt-0.5"></span>
+            </button>
+
+            <!-- 5. Perfil -->
+            <button class="flex flex-col items-center justify-center flex-1 py-1 text-slate-400 hover:text-white transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              <span class="text-[9px] font-medium tracking-tight mt-0.5">Perfil</span>
+              <span class="w-1 h-1 rounded-full bg-transparent mt-0.5"></span>
+            </button>
+
+          </nav>
+
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: ESPECIFICACIONES TÉCNICAS DEL DISEÑO PARA TU IA -->
+      <div class="lg:col-span-6 space-y-4">
+        
+        <div class="p-5 rounded-3xl glass-ios space-y-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+              <span>🍎 Reglas del Sistema «Glass iOS»</span>
+            </h2>
+            <span class="text-xs font-mono text-rose-400">HIG 2026</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs text-slate-300">
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/10">
+              <div class="font-bold text-white mb-1">1. Fijación Permanente de Barras (Zero-Scroll-Loss)</div>
+              <p class="text-slate-400 text-[11px]">
+                La cabecera superior (<code class="text-rose-300 font-mono">AppHeader</code>) y la barra inferior (<code class="text-rose-300 font-mono">BottomNav</code>) nunca deben desaparecer ni moverse al hacer scroll. El contenedor central usa <code class="text-rose-300 font-mono">overflow-y-auto</code> independiente con barra de scroll invisible.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/10">
+              <div class="font-bold text-white mb-1">2. Eliminación Total del Botón Flotante (+) en Móvil</div>
+              <p class="text-slate-400 text-[11px]">
+                No coloques un botón grande (+). La barra de 5 iconos debe ser uniforme, compacta (50px a 54px) y táctil. «Proponer Quedada» vive en el header o en la pantalla de inicio.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/10">
+              <div class="font-bold text-white mb-1">3. Mini-Mapa en Punto de Encuentro + WhatsApp</div>
+              <p class="text-slate-400 text-[11px]">
+                Se elimina el muro de comentarios. Se muestra el punto exacto con radar GPS visual, waypoint y botón de Google Maps. La coordinación va al grupo de WhatsApp.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/10">
+              <div class="font-bold text-white mb-1">4. Menú Lateral Dinámico en Tablet (iPad Split-View)</div>
+              <p class="text-slate-400 text-[11px]">
+                En tablets, la barra lateral debe poder colapsarse con un botón de alternancia (<code class="text-rose-300 font-mono">toggle</code>), expandiendo el feed al 100% y manteniendo cabecera y barra inferior fijas.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CÓDIGO CSS READY-TO-USE PARA COPIAR A LA IA -->
+        <div class="p-5 rounded-3xl glass-ios space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider">CSS Tokens Glassmorphism iOS</h3>
+            <button onclick="copiarTexto(document.getElementById('cssSnippet').innerText)" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold">
+              Copiar CSS
+            </button>
+          </div>
+          <pre id="cssSnippet" class="p-3 rounded-xl bg-slate-950 border border-white/10 font-mono text-[10px] text-emerald-400 overflow-x-auto leading-relaxed">
+/* Tokens Oficiales Glass iOS */
+.glass-header-fixed {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-bottom-nav-fixed {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  height: 54px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-card-item {
+  background: rgba(30, 41, 59, 0.60);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}</pre>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="mt-8 text-center text-xs text-slate-500 pb-6">
+    ADYP (A Disfrutar y Punto) · Especificación Maestra Glassmorphism iOS para Modelos de Inteligencia Artificial (Claude, GPT, Gemini, Arena.ai)
+  </footer>
+
+  <!-- SCRIPT DE DESCARGA Y COPIADO AUTOMÁTICO -->
+  <script>
+    function copiarTexto(texto) {
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Copiado al portapapeles con éxito');
+      }).catch(() => {
+        const t = document.createElement('textarea');
+        t.value = texto;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        alert('Copiado al portapapeles');
+      });
+    }
+
+    function descargarEsteArchivo() {
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'diseno.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function toggleModal(id) {
+      alert('Panel interactivo nativo iOS desplegado');
+    }
+
+    function copiarPromptMaestro() {
+      // El prompt se lee o copia directamente
+      const promptText = `PROMPT MAESTRO DEFINITIVO PARA ARENA.AI / SISTEMA GLASSMORPHISM iOS
+- Cabecera y Barra Inferior fijas permanentes sin scroll (móvil, tablet y web).
+- Barra inferior compacta de 5 accesos, sin botón (+) grande.
+- Mini-mapa GPS en punto de encuentro (ej: Frente a la taquilla de la estación de tren de Cotos a las 09:15 h).
+- Eliminación del muro de dudas: sustituido por botón al grupo privado de WhatsApp.
+- Menú lateral dinámico y auto-ocultable en tablet.
+- Diseño Glassmorphism iOS: blur(24px) saturate(190%), border 1px rgba(255,255,255,0.12).`;
+      copiarTexto(promptText);
+      const btn = document.getElementById('txtCopiar');
+      if (btn) btn.innerText = '¡Prompt Copiado!';
+      setTimeout(() => { if (btn) btn.innerText = 'Copiar Prompt Maestro'; }, 3000);
+    }
+  </script>
+</body>
+</html>
